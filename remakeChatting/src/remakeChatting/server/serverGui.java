@@ -1,4 +1,4 @@
-package remakeChatting;
+package remakeChatting.server;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +20,6 @@ public class serverGui extends JFrame {
 	private JButton[] jb=new JButton[2];
 	private JTextArea ja=new JTextArea();
 	private JScrollPane js=new JScrollPane();
-	private String[] buttonContent={"Connection","Server_Stop"};
 	private serverGuiController serverGuiControl;
 	
 

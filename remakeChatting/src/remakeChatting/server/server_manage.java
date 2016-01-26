@@ -1,4 +1,4 @@
-package remakeChatting;
+package remakeChatting.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;

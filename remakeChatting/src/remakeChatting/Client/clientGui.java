@@ -1,4 +1,4 @@
-package remakeChatting;
+package remakeChatting.Client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class clientGui extends JFrame implements ActionListener, KeyListener{
+public class clientGui extends JFrame {
 	private	JPanel ChattingJpanel=new JPanel();
 	private	JTextField sendTextField=new JTextField();
 	private	JScrollPane scrollPane = new JScrollPane();
@@ -23,16 +23,37 @@ public class clientGui extends JFrame implements ActionListener, KeyListener{
 	private String id;
 	private String ip;
 	private int port;
+	private clientGui_controller client_control;
 	public clientGui(String id, String ip, int port){
+		System.out.println(id);
 		this.id=id;
 		this.ip=ip;
 		this.port=port;
+		client_control=new clientGui_controller(this);
 		
 		panelReSize();
 		sendTextFieldGenerate();
 		textAreaGenerate();
 		buttonGenerate();
 		panelGenerate();
+	}
+	public JTextArea getTextArea(){
+		return textArea;
+	}
+	public JButton getButton(){
+		return jb;
+	}
+	public JTextField getTextField(){
+		return sendTextField;
+	}
+	public String getId(){
+		return id;
+	}
+	public String getIp(){
+		return ip;
+	}
+	public int getPort(){
+		return port;
 	}
 	private void panelReSize(){
 		setBounds(100, 100, 425, 385);
@@ -47,7 +68,7 @@ public class clientGui extends JFrame implements ActionListener, KeyListener{
 		sendTextField.setBounds(105, 300, 170, 40);
 		sendTextField.setColumns(5);
 		ChattingJpanel.add(sendTextField);
-		sendTextField.addKeyListener(this);
+		sendTextField.addKeyListener(client_control);
 	}
 	private void textAreaGenerate(){
 		textArea=new JTextArea();
@@ -62,40 +83,12 @@ public class clientGui extends JFrame implements ActionListener, KeyListener{
 		jb=new JButton("Send");
 		jb.setBounds(285, 300, 115, 42);
 		ChattingJpanel.add(jb);
-		jb.addActionListener(this);
+		jb.addActionListener(client_control);
 	}
 	private void panelGenerate(){
 		textArea.setEnabled(false);
 		loginUser.setEnabled(false);
 		setVisible(true);
-		
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		/*if(e.getSource().equals(jb)){
-			c.send_message(sendTextField.getText());
-			sendTextField.setText("");
-			sendTextField.requestFocus();
-		}*/
-	}
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		/*if(e.getKeyCode()==10){//엔터키 눌렀을시 텍스트 보내기.
-			c.send_message(sendTextField.getText());
-			sendTextField.setText("");
-			sendTextField.requestFocus();
-		}*/
-	}
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

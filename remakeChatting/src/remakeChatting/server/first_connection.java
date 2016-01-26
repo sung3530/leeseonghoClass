@@ -1,4 +1,4 @@
-package remakeChatting;
+package remakeChatting.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -14,8 +14,9 @@ public class first_connection extends Thread{
 	private ServerSocket serverSocket;
 	private Socket socket;
 	private Vector vc=new Vector();
-	private give_connection give_connection;
+	private server_connection give_connection;
 	private send sendMessage=new send();
+	private user_manager user_manager=new user_manager();
 	
 	
 	public first_connection(serverGui serverGui){
@@ -38,17 +39,8 @@ public class first_connection extends Thread{
 				socket=serverSocket.accept();
 				server_Gui.getTextArea().append("사용잡 접속!\n");
 				
-				user_info user=new user_info();
-				user.setSocket(socket);
-				user.setSendClass(sendMessage);
-				user.setServerGui(server_Gui);
-				user.user_Network();
-				vc.add(user);
-
-				
-				//user_Info user=new user_Info(socket,ta,vc,userArray);
-				//vc.add(user);
-				//user.start();
+				user_manager.setScocket(socket);
+				user_manager.user_Generate(server_Gui);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				if(e.getCause()!=null){

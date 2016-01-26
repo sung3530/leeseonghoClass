@@ -14,7 +14,7 @@ public class first_connection extends Thread{
 	private ServerSocket serverSocket;
 	private Socket socket;
 	private Vector vc=new Vector();
-	private server_connection give_connection;
+	private server_recieve give_connection;
 	private send sendMessage=new send();
 	private user_manager user_manager=new user_manager();
 	

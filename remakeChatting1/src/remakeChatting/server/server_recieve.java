@@ -7,13 +7,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class server_connection extends Thread {
+public class server_recieve extends Thread {
 	private DataInputStream dis;
 	private DataOutputStream dos;
 	private Socket User_socket;
 	private send sendMessage;
 	private serverGui server_gui;
-	
+	private parsing parsing=new parsing(this);
+	private user user;
 	public void setDatainputStream(DataInputStream dis){
 		this.dis=dis;
 	}
@@ -29,12 +30,19 @@ public class server_connection extends Thread {
 	public void setSocket(Socket User_socket){
 		this.User_socket=User_socket;
 	}
-	
+	public void setUser(user user){
+		this.user=user;
+	}
+	public serverGui getServerGui(){
+		return server_gui;
+	}
 	public void run(){
 		while(true){
 			try {
 				String message = dis.readUTF();//송신올떄까지 무한정 대기
-				sendMessage.send_Allpeople(message,server_gui);
+				parsing.parsingString(message);
+				parsing.divideCode(user);
+				//sendMessage.send_Allpeople(message,server_gui);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				try {

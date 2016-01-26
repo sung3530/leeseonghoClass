@@ -9,7 +9,7 @@ import java.net.Socket;
 
 import javax.swing.JTextArea;
 
-public class client_connection extends Thread {
+public class client_recieve extends Thread {
 	private Socket socket;
 	private InputStream is;
 	private DataInputStream dis;
@@ -17,6 +17,7 @@ public class client_connection extends Thread {
 	private DataOutputStream dos;
 	private JTextArea ja;
 	private clientGui cg;
+	private parsing parsing=new parsing();
 	public void setSocket(Socket socket){
 		this.socket=socket;
 	}
@@ -35,7 +36,7 @@ public class client_connection extends Thread {
 	public void setTextArea(JTextArea textarea){
 		this.ja=textarea;
 	}
-	public client_connection(clientGui cg){
+	public client_recieve(clientGui cg){
 		this.cg=cg;
 	}
 	public void run() {
@@ -43,7 +44,9 @@ public class client_connection extends Thread {
 		while(true){
 			try {
 				String msg = dis.readUTF();//서버로부터 메세지올때까지 무한정 대기
-				cg.getTextArea().append(msg+"\n");
+				parsing.parsingString(msg);
+				parsing.divideCode(cg);
+				//cg.getTextArea().append(msg+"\n");
 				//userTextArea();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

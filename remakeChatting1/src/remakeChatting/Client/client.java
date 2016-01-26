@@ -19,7 +19,7 @@ public class client {
 	private DataInputStream dis;
 	private OutputStream os;
 	private DataOutputStream dos;
-	private client_connection client_connection;
+	private client_recieve client_connection;
 	
 	public void client(){
 	}
@@ -56,6 +56,7 @@ public class client {
 	public Socket getSocket(){
 		return socket;
 	}
+
 	public void network(clientGui cg){
 		
 		try {
@@ -82,7 +83,7 @@ public class client {
 		}
 	}
 	public void start_client_connection(clientGui clientgui){
-		client_connection=new client_connection(clientgui);
+		client_connection=new client_recieve(clientgui);
 		client_connection.setDataInputStream(dis);
 		client_connection.setDataOutputStream(dos);
 		client_connection.setInputStream(is);

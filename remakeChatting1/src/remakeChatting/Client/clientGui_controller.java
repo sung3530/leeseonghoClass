@@ -18,7 +18,9 @@ public class clientGui_controller implements ActionListener,KeyListener{
 		send_message=new send();
 		generate_client(cg);
 	}
-
+	public clientGui getClientGui(){
+		return clientgui;
+	}
 	public void generate_client(clientGui cg){
 		client=new client();
 		client.setId(cg.getId());
@@ -33,11 +35,17 @@ public class clientGui_controller implements ActionListener,KeyListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(clientgui.getButton())){
 			System.out.println(client.getId());
-		send_message.send_message(client.getId()+":"+clientgui.getTextField().getText(),client.getDataOutputStream(),clientgui);
+		send_message.send_message("msg@"+client.getId()+":"+clientgui.getTextField().getText(),client.getDataOutputStream(),clientgui);
 		clientgui.getTextField().setText("");
 		clientgui.getTextField().requestFocus();
 	}
-
+		else if(e.getSource().equals(clientgui.getRoom_make())){
+			
+		}
+		else if(e.getSource().equals(clientgui.getRoom_participate())){
+			
+			
+		}
 	}
 
 	@Override

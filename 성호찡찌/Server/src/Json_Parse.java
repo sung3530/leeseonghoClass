@@ -9,7 +9,9 @@ public class Json_Parse {
 	private JSONParser parser = new JSONParser();
 	private Room room;
 	private JSONObject json_list;
+	private JSONObject json_userList;
 	private String json_string;
+	private JSONObject json_temp;
 	
 	public void json_parsing(String json_string,Server_GUI Server_GUI,User user){
 
@@ -52,6 +54,22 @@ public class Json_Parse {
 				json_Data=new JSONObject();
 				json_Data.put("code", "yes");
 				user.getDataOutputStream().writeUTF(json_Data.toJSONString());
+				json_list=new JSONObject();
+				json_list.put("code", "advise");
+				json_list.put("title", room.getTitle());
+				json_list.put("master", room.getMaster());
+				json_list.put("people", room.getUser_Number());
+				json_list.put("row",Room_Manager.getInstance().getRoom_Row());
+				json_string=json_list.toJSONString();
+				User_Manager.getInstance().send_ToAll(json_string, Server_GUI);
+				//room에 있는 send_toall로  userlist 보내기.
+				json_userList=new JSONObject();
+				json_userList=room.getUserList();
+				user.getDataOutputStream().writeUTF(json_userList.toJSONString());
+				json_temp=new JSONObject();
+				json_temp.put("code", "addUserList");
+				json_temp.put("id", user.getId());
+				room.send_ToAll_exceptionMe(json_temp.toJSONString(), Server_GUI, user);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -22,7 +22,7 @@ public class Json_Parsing {
 	
 	public void json_parse(String json_String){
 		try {
-			json_Data.clear();
+			json_Data=new JSONObject();
 			json_Data=(JSONObject) parser.parse(json_String);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -37,7 +37,7 @@ public class Json_Parsing {
 			String[] temp=new String[3];
 			temp[0]=(String) json_Data.get("title");
 			temp[1]=(String) json_Data.get("master");
-			temp[2]="1";
+			temp[2]="0";
 			Object[][] data=new Object[1][3];
 			data[0][0]=temp[0];
 			data[0][1]=temp[1];
@@ -50,7 +50,7 @@ public class Json_Parsing {
 			JOptionPane.showMessageDialog(null, "방을 못 찾는중 또는 5명 넘음", "Error", JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case "yes" :
-			Message_Recieve.getRoom_GUI().removeAll();
+			Message_Recieve.getRoom_GUI().dispose();
 			client_GUI=new Client_GUI(Message_Recieve.getClient());
 			break;
 		case "msg" :
@@ -69,6 +69,38 @@ public class Json_Parsing {
 				i++;
 			}
 			Message_Recieve.getRoom_GUI().resetTable(listdata);
+			break;
+		case "advise" :
+			listdata=new Object[50][3];
+			String[] adtemp=new String[3];
+			adtemp[0]=(String) json_Data.get("title");
+			adtemp[1]=(String) json_Data.get("master");
+			Object row=json_Data.get("row");
+			Object[][] addata=new Object[1][3];
+			addata[0][0]=adtemp[0];
+			addata[0][1]=adtemp[1];
+			addata[0][2]=json_Data.get("people");
+			Message_Recieve.getRoom_GUI().adviseJtable(Integer.parseInt(row.toString()), addata);
+			break;
+		case "userList" :
+			String[] idList=new String[5];
+			System.out.println(json_String);
+			Json_temp= (JSONArray) json_Data.get("list");
+			Iterator itTemp=Json_temp.iterator();
+			int k=0;
+			while(itTemp.hasNext()){
+				idList[k]=(String)itTemp.next();
+				k++;
+			}
+			k=0;
+			while(idList[k]!=null) {
+				client_GUI.getloginUser().append(idList[k]+"\n");
+				k++;
+			}
+			
+			break;
+		case "addUserList" :
+			client_GUI.getloginUser().append((String)json_Data.get("id")+"\n");
 			break;
 		default:
 			break;

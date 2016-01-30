@@ -34,7 +34,9 @@ public class Client_GUI extends JFrame implements ActionListener, KeyListener {
 	public JButton getButton(){
 		return jb;
 	}
-
+	public JTextArea getloginUser(){
+		return loginUser;
+	}
 	public JTextField getTextField(){
 		return sendTextField;
 	}
@@ -83,7 +85,7 @@ public class Client_GUI extends JFrame implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==10){//엔터키 눌렀을시 텍스트 보내기.
 			if(sendTextField.getText()!=null)
-			client.send_JsonMessage(client.getId()+":"+"msg", sendTextField.getText());
+			client.send_JsonMessage("msg", client.getId()+":"+sendTextField.getText());
 			sendTextField.setText("");
 			sendTextField.requestFocus();
 	}
@@ -98,7 +100,7 @@ public class Client_GUI extends JFrame implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 	
 		if(e.getSource().equals(jb)){
-			client.send_JsonMessage(client.getId()+":"+"msg", sendTextField.getText());
+			client.send_JsonMessage("msg", client.getId()+":"+sendTextField.getText());
 			sendTextField.setText("");
 			sendTextField.requestFocus();
 		}

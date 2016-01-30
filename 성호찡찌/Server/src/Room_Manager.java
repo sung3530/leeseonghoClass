@@ -9,11 +9,14 @@ public class Room_Manager {
 	private JSONArray AllList = new JSONArray();
 	private JSONObject sendList=new JSONObject();
 	private Vector roomList=new Vector();
+	private int room_Row;
 	
 	public static Room_Manager getInstance(){
 		return Room_Manager;
 	}
-	
+	public int getRoom_Row(){
+		return room_Row;
+	}
 	public Room room_Make(String title,String master,User user){
 		Room room=new Room(title,master,user);
 		roomList.add(room);
@@ -25,8 +28,10 @@ public class Room_Manager {
 		for (int i = 0; i < roomList.size(); i++) {
 			
 			Room room=(Room)roomList.elementAt(i);
+
 			if(room.getTitle().equals(title)&&room.getMaster().equals(master)&&room.getUser_Number()<5){
 				room.plusUser(user);
+				room_Row=i;
 				return room;
 			}
 		}

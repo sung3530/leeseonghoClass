@@ -18,11 +18,12 @@ public class User {
 	private String Json_String;
 	private Message_Reciever Message_Reciever;
 	
-	public String getId(){
-		return id;
-	}
+
 	public DataOutputStream getDataOutputStream(){
 		return dos;
+	}
+	public String getId(){
+		return id;
 	}
 	public void user_Network(Socket User_socket,Server_GUI Server_GUI){
 		this.User_socket=User_socket;
@@ -31,7 +32,8 @@ public class User {
 			dis=new DataInputStream(is);
 			os=User_socket.getOutputStream();
 			dos=new DataOutputStream(os);
-			
+			id=dis.readUTF();
+			System.out.println(id);
 			this.Message_Reciever=new Message_Reciever(dis,dos,this,User_socket,Server_GUI);
 			this.Message_Reciever.start();
 			}

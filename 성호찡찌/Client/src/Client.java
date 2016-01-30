@@ -59,6 +59,7 @@ public class Client {
 		dis=new DataInputStream(is);
 		os=socket.getOutputStream();
 		dos=new DataOutputStream(os);
+		dos.writeUTF(id);
 		json_data.clear();
 		json_data.put("code", "RoomList");
 		dos.writeUTF(json_data.toJSONString());

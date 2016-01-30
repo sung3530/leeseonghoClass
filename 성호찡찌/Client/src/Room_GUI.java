@@ -53,14 +53,15 @@ public class Room_GUI extends JFrame implements ActionListener, MouseListener{
 		setVisible(true);
 	}
 	public void resetTable(Object[][] data){
-		 DefaultTableModel model_user = new DefaultTableModel(tableName, 0);
-		 JTable table_user=new JTable(model_user)
+			model_user = new DefaultTableModel(tableName, 0);
+		 table_user=new JTable(model_user)
 		   {
 		      public boolean isCellEditable(int rowIndex,int colIndex)
 		      {
 		         return false;
 		      }
 		   };   
+		   mouseClick();
 		int i=0;
 		while(data[i][0]!=null){
 		model_user.addRow(data[i]);
@@ -71,6 +72,10 @@ public class Room_GUI extends JFrame implements ActionListener, MouseListener{
 		revalidate();
 		repaint();
 		setVisible(true);
+	}
+	public void adviseJtable(int room_Row,Object[][] data){
+		model_user.removeRow(room_Row);
+		model_user.insertRow(room_Row, data[0]);
 	}
 	private void guiReSize(){
 		setBounds(0, 0, 500, 510);

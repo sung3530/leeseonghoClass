@@ -2,7 +2,6 @@
 using namespace std;
 char Random::randomShape(){
 	random = rand() % 4;
-	cout << random;
 	switch (random)
 	{
 	case 0 :

@@ -1,6 +1,6 @@
-#include "AnyPang.h"
+#include "AniPang.h"
 int main(){
-	AnyPang anana;
-	anana.firstSetting();
+	AniPang game;
+	game.gamePlaying();
 	return 0;
 }

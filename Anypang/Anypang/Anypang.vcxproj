@@ -76,13 +76,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AniPang.cpp" />
+    <ClCompile Include="ChangeCoordinatecpp.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pang.cpp" />
     <ClCompile Include="print.cpp" />
-    <ClCompile Include="AnyPang.cpp" />
+    <ClCompile Include="AniPangMap.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="LowerOneDown.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnyPang.h" />
+    <ClInclude Include="AniPang.h" />
+    <ClInclude Include="AniPangMap.h" />
+    <ClInclude Include="ChangeCoordinate.h" />
+    <ClInclude Include="LowerOneDown.h" />
+    <ClInclude Include="Pang.h" />
     <ClInclude Include="print.h" />
     <ClInclude Include="Random.h" />
   </ItemGroup>
